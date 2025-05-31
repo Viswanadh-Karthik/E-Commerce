@@ -1,0 +1,54 @@
+package com.example.demo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.Inventory;
+import com.example.demo.repository.InventoryRepository;
+
+@Service
+public class InventoryService {
+	
+	@Autowired
+	private InventoryRepository inventoryRepo;
+	public boolean isProductAvailable(String product, int quantity) {
+		return inventoryRepo.findByProduct(product)
+				.map(inventory -> inventory.getStock() >= quantity)
+				.orElse(false);
+	}
+	
+	public Inventory addInventory(Inventory inventory) {
+		return inventoryRepo.save(inventory);
+	}
+	public void deleteInventory(Long id) {
+		inventoryRepo.deleteById(id);
+	}
+	public List<Inventory> getAllInventory(){
+		return inventoryRepo.findAll();
+	}
+	public Inventory updateInventory(Long id, Inventory updatedInventory) {
+		Inventory existingInventory = inventoryRepo.findById(id)
+				.orElseThrow(() -> new RuntimeException("Inventory Not Found"));
+		existingInventory.setProduct(updatedInventory.getProduct());
+		existingInventory.setStock(updatedInventory.getStock());
+		return inventoryRepo.save(existingInventory);
+	}
+	public void reduceStock(String product, int quantity) {
+		Inventory inventory = inventoryRepo.findByProduct(product)
+				.orElseThrow(() -> new RuntimeException("Product not Found"));
+		if(inventory.getStock() < quantity) {
+			throw new RuntimeException("Not enough Stock Available");
+		}
+		inventory.setStock(inventory.getStock()-quantity);
+		inventoryRepo.save(inventory);
+	}
+	
+	public void addStock(String product, int quantity) {
+		Inventory inventory = inventoryRepo.findByProduct(product)
+				.orElseThrow(() -> new RuntimeException("Product not Found"));
+		inventory.setStock(inventory.getStock() + quantity);
+		inventoryRepo.save(inventory);
+	}
+}

@@ -1,0 +1,28 @@
+package com.example.demo.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.client.InventoryClient;
+import com.example.demo.entity.Order;
+import com.example.demo.repository.OrderRepository;
+
+@Service
+public class OrderService {
+	
+	@Autowired
+	private OrderRepository orderRepo;
+	
+	@Autowired
+	private InventoryClient client;
+	
+	public Order placeOrder(Order order) {
+		boolean isAvailable = client.checkInventory(order.getProduct(), order.getQuantity());
+		if(!isAvailable) {
+			throw new Exception("Product Not Available");
+		}
+		client.reduceStcok(order.getProduct(), order.getQuantity());
+		
+		return orderRepo.save(order);
+	}
+}
