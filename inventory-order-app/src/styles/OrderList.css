@@ -1,49 +1,59 @@
-.order-list-container {
-  margin-top: 2rem;
-  background-color: #ffffff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+.order-list {
+  height: 100%;
 }
 
-.order-list-container h2 {
-  font-size: 1.3rem;
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  color: #2d3748;
+.order-list-title {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
-.order-list-container h2 .section-icon {
-  font-size: 1.5rem;
-  color: #38a169; /* Green color for Orders icon */
+.order-list-title h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+}
+
+.order-list-title svg {
+  color: var(--primary-color);
+}
+
+.order-count {
+  background-color: var(--hover-bg);
+  color: var(--text-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 .order-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .order-table th,
 .order-table td {
-  padding: 0.75rem 1rem; /* Reverted padding slightly */
+  padding: 0.75rem 1rem;
   text-align: left;
-  border-bottom: 1px solid #e2e8ef;
-  color: #4a5568;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-light);
   font-size: 0.9rem;
-  vertical-align: middle; /* Align content vertically */
+  vertical-align: middle;
 }
 
 .order-table th {
-  background-color: #f7fafc;
+  background-color: var(--card-header-bg);
   font-weight: 600;
-  color: #2d3748;
+  color: var(--text-dark);
   text-transform: uppercase;
-  font-size: 0.8rem;
-  border-bottom: 2px solid #e2e8ef;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.order-table tbody tr:hover {
+  background-color: var(--hover-bg);
 }
 
 .order-table tbody tr:last-child td {
@@ -51,66 +61,40 @@
 }
 
 .order-table .quantity-cell {
-  white-space: nowrap; /* Prevent wrapping for the pill */
+  white-space: nowrap;
 }
 
 .order-table .quantity-cell span {
   display: inline-block;
-  background-color: #ebf8ff;
-  color: #2b6cb0;
-  padding: 0.15rem 0.6rem;
-  border-radius: 9999px;
+  background-color: rgba(79, 70, 229, 0.1);
+  color: var(--primary-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-sm);
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .order-actions {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  justify-content: flex-end;
 }
 
-.order-actions .edit-button,
-.order-actions .delete-button {
-  padding: 0.3rem 0.6rem;
-  border: 1px solid #cbd5e0;
-  background-color: #ffffff;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  transition: all 0.2s ease-in-out;
-  display: flex; /* Use flex to center icon and text if present */
+.order-actions button {
+  display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-.order-actions .edit-button {
-  color: #4a5568;
-  border-color: #a0aec0;
-}
-
-.order-actions .delete-button {
-  color: #e53e3e;
-  border-color: #feb2b2;
-}
-
-.order-actions .edit-button:hover {
-  background-color: #f7fafc;
-  border-color: #3182ce;
-  color: #3182ce;
-}
-
-.order-actions .delete-button:hover {
-  background-color: #fff5f5;
-  border-color: #e53e3e;
-  color: #b91c1c;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
 }
 
 .no-orders {
   text-align: center;
-  color: #718096;
-  margin-top: 1.5rem;
-  padding: 1.5rem;
-  background-color: #edf2f7;
-  border-radius: 4px;
+  color: var(--text-muted);
+  padding: 2rem;
+  background-color: var(--hover-bg);
+  border-radius: var(--border-radius);
+  margin: 0;
+  font-size: 0.95rem;
 }
